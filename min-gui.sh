@@ -25,7 +25,8 @@ else
     echo "no recompile cheking if update is needed" 
     echo $gitout | grep -v "up to date"
     if [ "$?" -eq 0 ]; then
-      echo $out | grep 3
+        echo $out | grep 3
+        echo "compiling"
         if ["$?" -eq 0 ]; then
             ./gradlew server:dist
         else
@@ -39,19 +40,22 @@ if [ "$?" -eq 1 ]; then
         echo $out | grep 3
         if ["$?" -eq 0 ]; then
             if test -e desktop/build/libs/mindustry.jar; then
+                echo "running"
                 java -jar desktop/build/libs/mindustry.jar
             else
+                echo "a compile is required as there is no jar to run"
                 ./gradlew desktop:dist
                 java -jar desktop/build/libs/mindustry.jar
             fi
         else
             if test -e server/build/libs/mindustry.jar; then
+                echo "running"
                 java -jar server/build/libs/mindustry.jar
             else
+                echo "a compile is required as there is no jar to run"
                 ./gradlew desktop:dist
                 java -jar server/build/libs/mindustry.jar
             fi
         fi  
 fi
 rm $tmp
-
