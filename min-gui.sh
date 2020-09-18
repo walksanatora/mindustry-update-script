@@ -16,7 +16,7 @@ echo "$gitout" >> updatelogs.txt
 echo $out | grep 2
 if [ "$?" -eq 0 ]; then
     echo $out | grep 3
-    if [ "$?" -eq 0 ]; then
+    if [ "$?" -eq 1 ]; then
         ./gradlew server:dist
     else
         ./gradlew desktop:dist
@@ -25,9 +25,9 @@ else
     echo "no recompile cheking if update is needed" 
     echo $gitout | grep -v "up to date"
     if [ "$?" -eq 0 ]; then
-        echo $out | grep 3
         echo "compiling"
-        if ["$?" -eq 0 ]; then
+        echo $out | grep 3
+        if ["$?" -eq 1 ]; then
             ./gradlew server:dist
         else
             ./gradlew desktop:dist
@@ -38,7 +38,7 @@ fi
 echo $out | grep 4
 if [ "$?" -eq 1 ]; then
         echo $out | grep 3
-        if ["$?" -eq 0 ]; then
+        if ["$?" -eq 1 ]; then
             if test -e desktop/build/libs/mindustry.jar; then
                 echo "running"
                 java -jar desktop/build/libs/mindustry.jar
