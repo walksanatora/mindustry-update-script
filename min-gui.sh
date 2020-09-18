@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 tmp=$(mktemp)
 
 dialog --checklist "options:" 0 0 4 1 "6.0 version" on 2 "forcing compile" off 3 "compile server build" off 4 "compile only no run" off 2>"$tmp"
