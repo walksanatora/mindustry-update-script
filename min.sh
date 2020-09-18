@@ -1,5 +1,4 @@
-#! /bin/sh
-
+#!/usr/bin/env bash
 if [ "$#" -eq 0 ]; then
     inputs="-6.0 -desktop"
     echo "defaulting"
